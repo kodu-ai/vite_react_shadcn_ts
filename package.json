@@ -7,10 +7,10 @@
     "dev:api": "bun --watch src/server/dev.ts",
     "dev:web": "vite",
     "dev": "concurrently \"bun run dev:api\" \"bun run dev:web\"",
-    "build:api": "esbuild src/server/index.ts --bundle --outfile=dist/server/index.js --platform=node --format=esm --packages=external",
+    "build:api": "node esbuild.mjs",
     "build": "bun run build:api && vite build",
     "build:dev": "vite build --mode development",
-    "start": "node server.js",
+    "start": "node dist/server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

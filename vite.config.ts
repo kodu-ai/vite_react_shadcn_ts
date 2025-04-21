@@ -6,8 +6,6 @@ import { componentTagger } from 'lovable-tagger';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: '::',
-    port: 8080,
     proxy: {
       // Proxy /api requests to our Hono server running on port 6363
       '/api': {
@@ -27,6 +25,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    // Explicitly set the output directory
+    outDir: 'dist',
     // Prevent Vite from clearing the dist directory before building,
     // so the esbuild output (dist/server/index.js) is preserved.
     emptyOutDir: false,
