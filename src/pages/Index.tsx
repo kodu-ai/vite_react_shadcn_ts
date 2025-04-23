@@ -13,24 +13,36 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useWindowSize } from '@/hooks/use-window-size';
-import { Sparkles } from 'lucide-react'; // Keeping Sparkles, fits the vibe!
+import { Zap } from 'lucide-react'; // Changed icon to Zap for more energy!
+import { useToast } from '@/components/ui/use-toast'; // Import toast for the Easter egg
 
-export default function ItaewonNightlifePage() { // Renamed component for clarity
+export default function ItaewonMadnessPage() { // Renamed component
   const { width, height } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
-  const [isEntering, setIsEntering] = useState(false); // Renamed state
+  const [isEntering, setIsEntering] = useState(false);
+  const { toast } = useToast(); // Initialize toast
 
-  const handleEnterClick = () => { // Renamed handler
+  const handleEnterClick = () => {
     if (isEntering) return;
 
     setIsEntering(true);
-    setShowConfetti(true); // Let's keep the confetti!
+    setShowConfetti(true);
 
     setTimeout(() => {
       setShowConfetti(false);
       setTimeout(() => setIsEntering(false), 500);
     }, 5000);
   };
+
+  // Easter Egg Handler
+  const handleSojuClick = () => {
+    toast({
+      title: "🤫 Psst... Pro Tip:",
+      description: "Tomorrow's survival kit: Haejangguk and maybe sunglasses indoors. You got this.",
+      variant: "destructive", // Make it stand out a bit
+    });
+  };
+
 
   // Animation Variants remain the same
   const cardVariants = {
@@ -51,16 +63,18 @@ export default function ItaewonNightlifePage() { // Renamed component for clarit
   };
 
   return (
-    <div className="container flex flex-1 flex-col items-center justify-center py-12 text-center overflow-hidden min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white"> {/* Added a night vibe background */}
+    // Added a subtle repeating background pattern for more visual noise
+    // Note: Ensure placeholder.svg exists and is accessible via this path, or adjust path/remove bg-[url(...)]
+    <div className="container flex flex-1 flex-col items-center justify-center py-12 text-center overflow-hidden min-h-screen bg-gradient-to-br from-pink-900 via-purple-900 to-black text-white bg-[url('/placeholder.svg')] bg-repeat bg-opacity-5">
       {showConfetti && width && height && (
         <ReactConfetti
           width={width}
           height={height}
-          numberOfPieces={250}
-          gravity={0.15}
+          numberOfPieces={400} // More confetti!
+          gravity={0.2} // Slightly faster fall
           recycle={false}
           tweenDuration={4500}
-          colors={['#f43f5e', '#ec4899', '#d946ef', '#a855f7', '#8b5cf6']} // Neon-ish confetti
+          colors={['#f43f5e', '#ec4899', '#d946ef', '#a855f7', '#8b5cf6', '#ffffff']} // Added white
         />
       )}
 
@@ -70,29 +84,26 @@ export default function ItaewonNightlifePage() { // Renamed component for clarit
         initial="hidden"
         animate="visible"
       >
-        {/* Using Card component with adjusted styling for dark theme */}
-        <Card className="bg-black/50 border-purple-500/50 shadow-lg shadow-purple-500/30">
+        <Card className="bg-black/60 border-pink-500/60 shadow-xl shadow-pink-500/40 backdrop-blur-sm"> {/* More blur, more shadow */}
           <CardHeader>
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
-              className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/20 text-purple-400"
+              initial={{ scale: 0, rotate: -180 }} // Added rotation
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.4, type: 'spring', stiffness: 150 }} // Slightly bouncier
+              className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-pink-600/30 text-pink-400"
             >
-              <Sparkles className="h-6 w-6" />
+              <Zap className="h-7 w-7" /> {/* Using Zap icon */}
             </motion.div>
-            <CardTitle className="text-3xl font-bold tracking-tight text-pink-400">
-              Ready to Itaewon the Night? {/* Pun Title */}
+            <CardTitle className="text-4xl font-extrabold tracking-tighter text-fuchsia-400"> {/* Crazier title */}
+              Dive into Itaewon Madness!
             </CardTitle>
-            <CardDescription className="text-lg text-indigo-300 pt-2">
-              {/* Pun Description */}
-              Where the neon lights are brighter than your future plans, and the only thing steeper than the hills are the bar tabs.
+            <CardDescription className="text-lg text-purple-300 pt-2 italic"> {/* Crazier description */}
+              Where the world collides in a neon blur, bass shakes the pavement, and every alley promises adventure (or maybe just really good tteokbokki).
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-base text-gray-300">
-              {/* Pun Content */}
-              This page is your digital pre-game. Fuel up on pixels before you hit the real streets. Click below when you're ready to embrace the glorious chaos.
+            <p className="text-base text-gray-200 font-medium"> {/* Crazier content */}
+              Charge your phone, hydrate (seriously), and prepare your soul. This is just the loading screen for the main event. Click when you're ready to lose track of time (and maybe your friends).
             </p>
           </CardContent>
           <CardFooter className="flex justify-center pt-4">
@@ -103,19 +114,41 @@ export default function ItaewonNightlifePage() { // Renamed component for clarit
             >
               <Button
                 size="lg"
-                onClick={handleEnterClick} // Use renamed handler
-                disabled={isEntering} // Use renamed state
-                className="disabled:opacity-70 bg-pink-500 hover:bg-pink-600 text-white font-semibold" // Themed button
+                onClick={handleEnterClick}
+                disabled={isEntering}
+                className="disabled:opacity-70 bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold text-lg shadow-lg shadow-fuchsia-600/50" // Bolder button
               >
-                {isEntering ? 'Entering...' : 'Enter the Neon Jungle'} {/* Pun Button Text */}
-                <span className="ml-2 text-xl">🚀</span> {/* Changed emoji */}
+                {isEntering ? 'BRACING...' : 'Unleash the Night!'} {/* Crazier button text */}
+                <span className="ml-2 text-xl animate-pulse">🔥</span> {/* Pulsing fire emoji */}
               </Button>
             </motion.div>
           </CardFooter>
         </Card>
       </motion.div>
 
-      <p className="mt-8 text-sm text-purple-400/70">Powered by Soju & Azad.bot</p> {/* Adjusted footer */}
+      {/* Easter Egg Trigger */}
+      <p className="mt-8 text-sm text-purple-400/80">
+        Powered by{' '}
+        <span
+          className="cursor-pointer font-bold text-pink-400 hover:text-pink-300 underline decoration-dotted"
+          onClick={handleSojuClick} // Added onClick for Easter egg
+        >
+          Soju
+        </span>{' '}
+        & Azad.bot
+      </p>
+
     </div>
   );
 }
+
+// Make sure you have a Toaster component set up in your App layout for the toast to appear.
+// Example (add to your main layout/App.tsx if not present):
+// import { Toaster } from "@/components/ui/toaster"
+// ...
+// return (
+//   <ThemeProvider> {/* Or your main layout structure */}
+//     {/* Your page content */}
+//     <Toaster />
+//   </ThemeProvider>
+// )
