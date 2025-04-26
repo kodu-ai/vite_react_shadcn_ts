@@ -18,7 +18,7 @@ import { Sparkles } from 'lucide-react';
 export default function FancyMotionStartPage() {
   const { width, height } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
-  const [isCelebrating, setIsCelebrating] = useState(false); // State name is still isCelebrating, but text changes
+  const [isCelebrating, setIsCelebrating] = useState(false); // State name is still isCelebrating
 
   const handleCelebrationClick = () => {
     if (isCelebrating) return;
@@ -82,7 +82,7 @@ export default function FancyMotionStartPage() {
               <Sparkles className="h-6 w-6" />
             </motion.div>
             <CardTitle className="text-3xl font-bold tracking-tight">
-              Welcome Aboard!
+              Let's Build! {/* Updated Title */}
             </CardTitle>
             <CardDescription className="text-lg text-muted-foreground pt-2">
               Your new project canvas is ready and waiting for innovation.
