@@ -18,13 +18,13 @@ import { Sparkles } from 'lucide-react';
 export default function FancyMotionStartPage() {
   const { width, height } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
-  const [isCelebrating, setIsCelebrating] = useState(false);
+  const [isCelebrating, setIsCelebrating] = useState(false); // State name is still isCelebrating, but text changes
 
   const handleCelebrationClick = () => {
     if (isCelebrating) return;
 
     setIsCelebrating(true);
-    setShowConfetti(true);
+    setShowConfetti(true); // Keep confetti on launch
 
     setTimeout(() => {
       setShowConfetti(false);
@@ -40,10 +40,7 @@ export default function FancyMotionStartPage() {
       y: 0,
       transition: {
         duration: 0.6,
-        // Replace the invalid cubic-bezier with a standard easing string
-        ease: 'easeOut', // <-- CORRECTED VALUE
-        // Or if you wanted a specific curve, use valid values e.g.:
-        // ease: [0.25, 1, 0.5, 1], // Example: easeOutQuad
+        ease: 'easeOut',
       },
     },
   };
@@ -110,8 +107,8 @@ export default function FancyMotionStartPage() {
                 disabled={isCelebrating}
                 className="disabled:opacity-70"
               >
-                {isCelebrating ? 'Celebrating...' : 'Start the Celebration!'}
-                <span className="ml-2 text-xl">🎉</span>
+                {isCelebrating ? 'Launching...' : 'Launch Project'} {/* Updated Text */}
+                <span className="ml-2 text-xl">🚀</span> {/* Changed emoji to rocket */}
               </Button>
             </motion.div>
           </CardFooter>
