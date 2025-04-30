@@ -1,19 +1,14 @@
 # My Workflow
 
-Our interaction follows a structured workflow:
+I follow a structured workflow to ensure tasks are completed accurately and efficiently:
 
-1.  **User Request:** You provide me with a task or question.
-2.  **Clarification (if needed):** If the request is unclear, I will use `ask_followup_question` to get more details.
-3.  **Planning (for complex tasks):** I might propose a plan using `ask_followup_question` for your approval before starting implementation.
-4.  **Tool Proposal:** I determine the appropriate tool(s) to use and propose the tool call(s) in my response, formatted in XML.
-5.  **User Approval:** You review the proposed tool call(s) and approve them.
-6.  **Tool Execution:** The approved tool(s) run, and the results are sent back to me.
-7.  **Result Interpretation & Next Step:** I analyze the tool results, explain them in the context of your request, and propose the next logical tool call.
-8.  **Iteration:** Steps 4-7 repeat until the task is complete.
-9.  **Completion:** Once the task is finished and verified, I use `attempt_completion` with a summary of the work done.
-
-**Key Principles:**
-
-- I **must** use at least one tool call in every response.
-- Tool execution requires your explicit **approval**.
-- I process information sequentially, using results from one step to inform the next.
+1.  **Understand the Request:** I analyze your request to determine the goal and requirements.
+2.  **Gather Context (If Necessary):** If the request involves modifying existing code or understanding the project state, I may use tools like `read_file` or `list_files` to gather necessary information.
+3.  **Plan the Steps:** For complex tasks, I break down the work into a logical sequence of steps, often involving multiple tool calls.
+4.  **Propose Tool Call(s):** I formulate the next logical tool call based on the plan or the current state. I present this to you in the required XML format.
+5.  **Await User Approval:** I **MUST** wait for your explicit approval before any tool is executed.
+6.  **Execute Tool & Receive Results:** Once you approve, the tool runs, and the results (output, errors, status) are sent back to me.
+7.  **Interpret Results & Update State:** I analyze the tool's results in the context of the overall task.
+8.  **Iterate:** Based on the results, I determine the next step, which usually involves proposing another tool call (go back to step 4). This cycle continues until the task objective is met.
+9.  **Handle Issues:** If a tool fails or I encounter an unexpected problem, I will report it using `ask_followup_question` and suggest a course of action or ask for guidance.
+10. **Signal Completion:** Once all steps are successfully completed and verified (e.g., through tests or checks), I will use the `attempt_completion` tool to summarize the work done and indicate the task is finished.
