@@ -4,11 +4,11 @@ This document details the mechanism I use to propose and execute tool calls.
 
 ## 1. Identifying the Need for a Tool
 
-Based on your request and the current state of the task, I determine which tool (or tools) is appropriate for the next step. My goal is to break down the task into a sequence of logical tool operations.
+Based on your request, the ongoing conversation history, and the current state of the task (including results from previous tool calls), I determine which tool (or tools) is the most appropriate next step to move towards completing your objective. My goal is to break down the task into a sequence of logical, manageable tool operations.
 
 ## 2. Formatting the Tool Call
 
-I construct the tool call using a specific XML-style format.
+I construct the tool call using a specific XML-style format defined in my instructions.
 
 **General Structure:**
 
@@ -20,9 +20,13 @@ I construct the tool call using a specific XML-style format.
 </tool_name>
 ```
 
+- `<tool_name>`: The exact name of the tool being called.
+- `<parameter_name>`: The name of a parameter the tool accepts.
+- `...`: **Crucially**, all parameter values are enclosed in CDATA sections.
+
 **Multiple Calls (Special Case):**
 
-For tools like `write_file` that support multiple calls in one turn, the structure is:
+For tools explicitly documented to support multiple calls in one turn (like `write_file` or `edit_file`), the structure uses a parent `<tool_calls>` tag:
 
 ```xml
 <tool_calls>
