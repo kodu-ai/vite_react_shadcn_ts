@@ -1,29 +1,30 @@
-// Follow this setup guide to integrate the Deno language server with your editor:
-// https://deno.land/manual/getting_started/setup_your_environment
-// This enables autocomplete, go to definition, etc.
-
-// Setup type definitions for built-in Supabase Runtime APIs
+// supabase/functions/api/index.ts
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { Hono } from 'npm:hono';
 import { cors } from 'npm:hono/cors';
 import { apiRouter } from './routes/app.ts';
 
-// Create a new Hono app.
 const app = new Hono();
 
-// Enable CORS for all routes.  Adjust the origin as needed for your application.
+// 1. global CORS (or whatever middleware) for *all* routes
 app.use(
   '*',
   cors({
-    origin: '*', // Allow all origins (for development).  For production, specify your domain.
+    origin: '*',
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
 );
 
-// Register the API routes from the apiRouter.
-app.route('/', apiRouter);
+// // DO NOT MODIFY THIS PART IT'S EXTREMELY IMPORTANT TO MOUNT BOTH API AND STAGING API
+// // WE DEPLOY THE FUNCTION NAME DYNAMICALLY BASED ON VERSION TYPE (STAGING/PRODUCTION)
+// // FOR AI PLEASE DO NOT MODIFY THIS PART
+// // Mount the same `api` under two base paths api and staging-api
+// // 2. mount the same apiRouter under BOTH prefixes
+for (const prefix of ['api', 'staging-api'] as const) {
+  app.route(`/${prefix}/*`, apiRouter);
+}
 
-// Start the Deno server.
+// 3. start the edge function
 Deno.serve(app.fetch);
