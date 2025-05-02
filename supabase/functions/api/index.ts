@@ -6,25 +6,24 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { Hono } from 'npm:hono';
 import { cors } from 'npm:hono/cors';
-import { z } from 'npm:zod-openapi';
+import { apiRouter } from './routes/app.ts';
 
-// pnpm add hono-openapi @hono/zod-validator zod zod-openapi
+// Create a new Hono app.
+const app = new Hono();
 
-// change this to your function name
-const functionName = 'hello-world';
-const app = new Hono().basePath(`/${functionName}`);
-app.use('/api/*', cors());
+// Enable CORS for all routes.  Adjust the origin as needed for your application.
 app.use(
-  '/api2/*',
+  '*',
   cors({
-    origin: 'http://example.com',
-    allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
-    allowMethods: ['POST', 'GET', 'OPTIONS'],
-    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
-    maxAge: 600,
+    origin: '*', // Allow all origins (for development).  For production, specify your domain.
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
 );
-app.get('/hello', (c) => c.text('Hello from hono-server!'));
 
+// Register the API routes from the apiRouter.
+app.route('/', apiRouter);
+
+// Start the Deno server.
 Deno.serve(app.fetch);
