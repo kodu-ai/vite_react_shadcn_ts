@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { ServiceCard } from "@/components/ServiceCard";
 import { GalleryCarousel } from "@/components/GalleryCarousel";
 import { ContactInfo } from "@/components/ContactInfo";
-import { Cut, Feather, Sparkles } from "lucide-react"; // Example icons
+import { Scissors, Feather, Sparkles } from "lucide-react"; // Corrected icon import
 
 const services = [
-  { title: "Classic Haircut", description: "Timeless style, precision cut.", price: "$35", icon: <Cut /> },
+  { title: "Classic Haircut", description: "Timeless style, precision cut.", price: "$35", icon: <Scissors /> }, // Corrected icon usage
   { title: "Modern Fade", description: "Sharp fade tailored to you.", price: "$40", icon: <Sparkles /> },
   { title: "Beard Trim & Shape", description: "Keep your beard looking its best.", price: "$25", icon: <Feather /> },
-  { title: "Hot Towel Shave", description: "Relaxing traditional shave experience.", price: "$45" },
+  { title: "Hot Towel Shave", description: "Relaxing traditional shave experience.", price: "$45" }, // Default icon will be used
 ];
 
 export default function LandingPage() {
