@@ -16,8 +16,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Explicitly set the output directory
     outDir: 'dist',
-    // Prevent Vite from clearing the dist directory before building,
-    // so the esbuild output (dist/server/index.js) is preserved.
-    emptyOutDir: false,
+    // Ensure the output directory is cleared before building (standard practice)
+    emptyOutDir: true,
   },
 }));
