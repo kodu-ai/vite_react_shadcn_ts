@@ -7,368 +7,58 @@ export type Json =
   | Json[]
 
 export type Database = {
-  public: {
+  staging: {
     Tables: {
-      ai_features: {
+      matan_posts: {
         Row: {
-          created_at: string | null
-          description: string
-          icon: string
-          id: string
-          name: string
-        }
-        Insert: {
-          created_at?: string | null
-          description: string
-          icon: string
-          id?: string
-          name: string
-        }
-        Update: {
-          created_at?: string | null
-          description?: string
-          icon?: string
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
-      ai_features_new: {
-        Row: {
-          created_at: string | null
-          description: string
-          icon: string
-          id: string
-          name: string
-        }
-        Insert: {
-          created_at?: string | null
-          description: string
-          icon: string
-          id?: string
-          name: string
-        }
-        Update: {
-          created_at?: string | null
-          description?: string
-          icon?: string
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
-      blog_comments: {
-        Row: {
-          author_name: string
-          content: string
-          created_at: string | null
-          id: string
-          post_id: string
-        }
-        Insert: {
-          author_name: string
-          content: string
-          created_at?: string | null
-          id?: string
-          post_id: string
-        }
-        Update: {
-          author_name?: string
-          content?: string
-          created_at?: string | null
-          id?: string
-          post_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "blog_comments_post_id_fkey"
-            columns: ["post_id"]
-            isOneToOne: false
-            referencedRelation: "blog_posts"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      blog_posts: {
-        Row: {
-          author_id: string | null
-          content: string
-          created_at: string | null
-          id: string
-          published: boolean | null
-          title: string
-          updated_at: string | null
-        }
-        Insert: {
-          author_id?: string | null
-          content: string
-          created_at?: string | null
-          id?: string
-          published?: boolean | null
-          title: string
-          updated_at?: string | null
-        }
-        Update: {
-          author_id?: string | null
-          content?: string
-          created_at?: string | null
-          id?: string
-          published?: boolean | null
-          title?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      clients: {
-        Row: {
+          content: string | null
           created_at: string
-          email: string | null
-          full_name: string
           id: string
-          phone: string | null
+          title: string
         }
         Insert: {
+          content?: string | null
           created_at?: string
-          email?: string | null
-          full_name: string
           id?: string
-          phone?: string | null
+          title: string
         }
         Update: {
+          content?: string | null
           created_at?: string
-          email?: string | null
-          full_name?: string
           id?: string
-          phone?: string | null
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          avatar_url: string | null
-          created_at: string | null
-          full_name: string | null
-          id: string
-          role: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          created_at?: string | null
-          full_name?: string | null
-          id: string
-          role?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          created_at?: string | null
-          full_name?: string | null
-          id?: string
-          role?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      reservations: {
-        Row: {
-          client_email: string
-          client_name: string
-          client_phone: string
-          created_at: string | null
-          date: string
-          id: string
-          service: string
-          status: string
-          time: string
-          updated_at: string | null
-        }
-        Insert: {
-          client_email: string
-          client_name: string
-          client_phone: string
-          created_at?: string | null
-          date: string
-          id?: string
-          service: string
-          status?: string
-          time: string
-          updated_at?: string | null
-        }
-        Update: {
-          client_email?: string
-          client_name?: string
-          client_phone?: string
-          created_at?: string | null
-          date?: string
-          id?: string
-          service?: string
-          status?: string
-          time?: string
-          updated_at?: string | null
+          title?: string
         }
         Relationships: []
       }
       services: {
         Row: {
-          category: string
-          created_at: string | null
+          created_at: string
           description: string | null
-          duration: number
+          duration_minutes: number | null
           id: string
           name: string
           price: number
-          updated_at: string | null
+          service_code: string
         }
         Insert: {
-          category: string
-          created_at?: string | null
+          created_at?: string
           description?: string | null
-          duration: number
+          duration_minutes?: number | null
           id?: string
           name: string
           price: number
-          updated_at?: string | null
+          service_code: string
         }
         Update: {
-          category?: string
-          created_at?: string | null
+          created_at?: string
           description?: string | null
-          duration?: number
+          duration_minutes?: number | null
           id?: string
           name?: string
           price?: number
-          updated_at?: string | null
+          service_code?: string
         }
         Relationships: []
-      }
-      transaction_services: {
-        Row: {
-          created_at: string | null
-          id: string
-          price: number
-          quantity: number
-          service_id: string | null
-          transaction_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          price: number
-          quantity?: number
-          service_id?: string | null
-          transaction_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          price?: number
-          quantity?: number
-          service_id?: string | null
-          transaction_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "transaction_services_service_id_fkey"
-            columns: ["service_id"]
-            isOneToOne: false
-            referencedRelation: "services"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "transaction_services_transaction_id_fkey"
-            columns: ["transaction_id"]
-            isOneToOne: false
-            referencedRelation: "transactions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      transactions: {
-        Row: {
-          client_id: string | null
-          created_at: string | null
-          date: string | null
-          id: string
-          notes: string | null
-          payment_method: string
-          stylist_id: string | null
-          tip: number | null
-          total: number
-          updated_at: string | null
-        }
-        Insert: {
-          client_id?: string | null
-          created_at?: string | null
-          date?: string | null
-          id?: string
-          notes?: string | null
-          payment_method: string
-          stylist_id?: string | null
-          tip?: number | null
-          total: number
-          updated_at?: string | null
-        }
-        Update: {
-          client_id?: string | null
-          created_at?: string | null
-          date?: string | null
-          id?: string
-          notes?: string | null
-          payment_method?: string
-          stylist_id?: string | null
-          tip?: number | null
-          total?: number
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "transactions_client_id_fkey"
-            columns: ["client_id"]
-            isOneToOne: false
-            referencedRelation: "clients"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "transactions_stylist_id_fkey"
-            columns: ["stylist_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      visits: {
-        Row: {
-          amount_paid: number
-          client_id: string
-          created_at: string
-          id: string
-          visit_date: string
-        }
-        Insert: {
-          amount_paid: number
-          client_id: string
-          created_at?: string
-          id?: string
-          visit_date: string
-        }
-        Update: {
-          amount_paid?: number
-          client_id?: string
-          created_at?: string
-          id?: string
-          visit_date?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "visits_client_id_fkey"
-            columns: ["client_id"]
-            isOneToOne: false
-            referencedRelation: "clients"
-            referencedColumns: ["id"]
-          },
-        ]
       }
     }
     Views: {
@@ -492,7 +182,7 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  public: {
+  staging: {
     Enums: {},
   },
 } as const
