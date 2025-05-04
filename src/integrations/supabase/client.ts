@@ -7,6 +7,6 @@ const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 export const SCHEMA = import.meta.env.VITE_SUPABASE_SCHEMA || 'staging';
 
 export const supabase = createClient<Database>(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_URL ?? '',
+  SUPABASE_PUBLISHABLE_KEY ?? ''
 );
