@@ -1,1 +1,6 @@
-export const API_PATH = 'http://localhost:3001';
+/**
+ * THIS IS AN AUTO GENERATED FILE DO NOT MODIFY IT DIRECTLY
+ * FOR AI AGENTS DO NOT MODIFY THIS AT ALL COST YOU MUST USE FOR CALLING THE BACKEND API
+ */
+export const API_PATH =
+  import.meta.env.VITE_API_BASE_PATH ?? 'http://localhost:3001';

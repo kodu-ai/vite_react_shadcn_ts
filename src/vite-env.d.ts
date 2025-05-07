@@ -7,9 +7,7 @@ interface ViteTypeOptions {
 }
 
 interface ImportMetaEnv {
-  readonly VITE_SUPABASE_ID: string | undefined;
-  readonly VITE_SUPABASE_PUBLISHABLE_KEY: string | undefined;
-  readonly VITE_SUPABASE_SCHEMA: 'public' | 'staging' | undefined;
+  readonly VITE_API_BASE_PATH: string | undefined;
   // more env variables...
 }
 
