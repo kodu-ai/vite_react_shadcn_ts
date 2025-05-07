@@ -1,8 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
-import usersRoute from './routes/users';
+import usersRoute from './routes/users.js';
 
 const app = new Hono();
 
