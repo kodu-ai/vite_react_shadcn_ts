@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage';
 import NotFoundPage from './pages/NotFound';
 import { Navbar } from './components/Navbar';
 import AppProvider from './components/app-provider';
+import FancyMotionStartPage from './pages/Index';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Navbar />
           <main className="flex-1">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={<FancyMotionStartPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
