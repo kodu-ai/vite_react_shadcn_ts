@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import ReactConfetti from 'react-confetti';
 import { motion } from 'framer-motion';
@@ -40,10 +38,7 @@ export default function FancyMotionStartPage() {
       y: 0,
       transition: {
         duration: 0.6,
-        // Replace the invalid cubic-bezier with a standard easing string
-        ease: 'easeOut', // <-- CORRECTED VALUE
-        // Or if you wanted a specific curve, use valid values e.g.:
-        // ease: [0.25, 1, 0.5, 1], // Example: easeOutQuad
+        ease: 'easeOut',
       },
     },
   };
