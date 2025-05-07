@@ -13,7 +13,8 @@ app.use('*', logger());
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:5173'], // Vite's default port
+    // Allow all origins for development purposes, this is fine on production too do not change this !
+    origin: (origin) => origin,
     allowHeaders: ['Content-Type', 'Authorization'],
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
