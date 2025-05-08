@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import NotFoundPage from './pages/not-found';
 import AppProvider from './components/app-provider';
-import FancyMotionStartPage from './pages/index';
+import FancyMotionStartPage from './pages/home';
 
 function App() {
   return (
